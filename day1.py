@@ -6,7 +6,7 @@ freq_delta = list(map(int,input_data))
 print(sum(freq_delta))
 
 # Part 2
-
+'''
 freq = np.cumsum(freq_delta)
 
 freq_repeat = None
@@ -19,3 +19,12 @@ while freq_repeat == None:
     if index >= len(freq):
         freq=np.append(freq,freq[-1]+np.cumsum(freq_delta))
 print(freq_repeat)
+'''
+index = 0
+freq_current = 0
+freq_history = set()
+while freq_current not in freq_history:
+    freq_history.add(freq_current)
+    freq_current += freq_delta[index]
+    index=(index+1)%len(freq_delta)
+print(freq_current)
