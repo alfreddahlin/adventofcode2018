@@ -1,6 +1,5 @@
 import re
-import numpy as np
-import collections
+#import numpy as np
 
 input_data = open('day4.txt','r').read().strip().split('\n')
 
