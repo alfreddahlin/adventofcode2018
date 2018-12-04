@@ -8,11 +8,11 @@ fabric = np.zeros((1000,1000))
 
 for nr,x,y,xr,yr in claims:
     fabric[x:(x+xr),y:(y+yr)]+=1
-print((fabric>1).sum())
+print('Part 1: ' + str((fabric>1).sum()))
 
 # Part 2
 unique_claim = []
 for nr,x,y,xr,yr in claims:
     if((fabric[x:(x+xr),y:(y+yr)]!=1).sum()==0):
         unique_claim.append(nr)
-print(unique_claim[0])
+print('Part 2: ' + str(unique_claim[0]))

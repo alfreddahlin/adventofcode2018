@@ -8,6 +8,27 @@ sleep_schedule = {}
 
 for index in range(len(sleep_data)):
     date = sleep_data[index][0]
+    action = sleep_data[index][2]
+    if(action=="Guard"):
+        guard = int(sleep_data[index][3])
+    if(action == "wakes"):
+        sleep_schedule[guard]=sleep_schedule.get(guard,{})
+        sleep_schedule[guard].update({minute: sleep_schedule[guard].get(minute,0)+1 for minute in range(int(sleep_data[index-1][1]),int(sleep_data[index][1]))})
+
+guards_sleep_minute = {id: max(sleep_schedule[id], key = lambda k: sleep_schedule[id][k]) for id in sleep_schedule}
+guard_most_sleep = max(sleep_schedule, key = lambda k: sum(sleep_schedule[k].values()))
+
+print('Part 1: ' + str(guard_most_sleep*guards_sleep_minute[guard_most_sleep]))
+
+# Part 2
+
+guard_most_sleep_minute = max(guards_sleep_minute, key = lambda k: sleep_schedule[k][guards_sleep_minute[k]])
+
+print('Part 2: ' + str(guard_most_sleep_minute*guards_sleep_minute[guard_most_sleep_minute]))
+
+'''
+for index in range(len(sleep_data)):
+    date = sleep_data[index][0]
     minute = int(sleep_data[index][1])
     action = sleep_data[index][2]
     if(action=="Guard"):
@@ -28,7 +49,7 @@ most_sleep = (0,0)
 for guard,sleep_minutes in sleep_schedule.items():
     if(len(sleep_minutes)>most_sleep[1]):
         most_sleep = (guard,len(sleep_minutes))
-
+#print(most_sleep[0],most_sleep[1])
 print(most_sleep[0]*max(set(sleep_schedule[most_sleep[0]]),key=sleep_schedule[most_sleep[0]].count))
 
 # Part 2
@@ -42,3 +63,4 @@ for guard,sleep_minutes in sleep_schedule.items():
             most_sleep = guard_most_sleep
 
 print(most_sleep[0]*most_sleep[1])
+'''

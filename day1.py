@@ -2,8 +2,8 @@ import numpy as np
 
 input_data = open('day1.txt','r').read().strip().split('\n') 
 
-freq_delta = list(map(int,input_data))
-print(sum(freq_delta))
+freq_delta = [int(number) for number in input_data]
+print('Part 1: ' + str(sum(freq_delta)))
 
 # Part 2
 '''
@@ -27,4 +27,4 @@ while freq_current not in freq_history:
     freq_history.add(freq_current)
     freq_current += freq_delta[index]
     index=(index+1)%len(freq_delta)
-print(freq_current)
+print('Part 2: ' + str(freq_current))
