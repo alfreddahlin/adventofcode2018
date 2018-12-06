@@ -39,5 +39,4 @@ for char in set(polymer.lower()):
     poly = reduce(re.sub(char+'|'+char.upper(),'', polymer))
     poly_reduced[char] = (poly, len(poly))
 
-print('Part 2:', poly_reduced[min(poly_reduced, key = lambda k: poly_reduced[k][1])][1])
-print(time.time()-s)
+print('Part 2:', min(poly_reduced.values(), key = lambda k: k[1])[1])

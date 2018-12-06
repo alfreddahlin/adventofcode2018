@@ -15,16 +15,16 @@ for index in range(len(sleep_data)):
         sleep_schedule[guard]=sleep_schedule.get(guard,{})
         sleep_schedule[guard].update({minute: sleep_schedule[guard].get(minute,0)+1 for minute in range(int(sleep_data[index-1][1]),int(sleep_data[index][1]))})
 
-guards_sleep_minute = {id: max(sleep_schedule[id], key = lambda k: sleep_schedule[id][k]) for id in sleep_schedule}
+guard_sleep_minute = {id: max(sleep_schedule[id], key = lambda k: sleep_schedule[id][k]) for id in sleep_schedule}
 guard_most_sleep = max(sleep_schedule, key = lambda k: sum(sleep_schedule[k].values()))
 
-print('Part 1:', guard_most_sleep*guards_sleep_minute[guard_most_sleep])
+print('Part 1:', guard_most_sleep*guard_sleep_minute[guard_most_sleep])
 
 # Part 2
 
-guard_most_sleep_minute = max(guards_sleep_minute, key = lambda k: sleep_schedule[k][guards_sleep_minute[k]])
+guard_most_sleep_minute = max(guard_sleep_minute, key = lambda k: sleep_schedule[k][guard_sleep_minute[k]])
 
-print('Part 2:', guard_most_sleep_minute*guards_sleep_minute[guard_most_sleep_minute])
+print('Part 2:', guard_most_sleep_minute*guard_sleep_minute[guard_most_sleep_minute])
 
 '''
 for index in range(len(sleep_data)):
