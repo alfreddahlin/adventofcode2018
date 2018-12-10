@@ -1,6 +1,6 @@
 import re
 
-input_data = open('day7.txt','r').read().strip().split('\n')
+input_data = open('day7.in','r').read().strip().split('\n')
 
 steps = [re.findall(r' ([A-Z]) ',line) for line in input_data]
 

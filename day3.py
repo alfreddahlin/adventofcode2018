@@ -1,6 +1,6 @@
 import re
 import numpy as np
-input_data = open('day3.txt','r').read().strip().split('\n')
+input_data = open('day3.in','r').read().strip().split('\n')
 
 claims = [list(map(int,re.findall(r'([0-9]+)',claim))) for claim in input_data]
 

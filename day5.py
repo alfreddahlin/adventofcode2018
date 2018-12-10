@@ -1,20 +1,16 @@
 import re
 
-input_data = open('day5.txt','r').read().strip()
+input_data = open('day5.in','r').read().strip()
 #input_data = 'dabAcCaCBAcCcaDA'
 
 def reduce(polymer):
     polymer_reduced = ''
-    #polymer_reduced = []
     for char in polymer:
         if polymer_reduced and char == polymer_reduced[-1].swapcase():
             polymer_reduced = polymer_reduced[:-1]
-            #polymer_reduced.pop()
         else:
             polymer_reduced += char
-            #polymer_reduced.append(char)
     return polymer_reduced
-    #return "".join(polymer_reduced)
 
 '''
 def reduce(polymer):

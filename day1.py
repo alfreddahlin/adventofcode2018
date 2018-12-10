@@ -1,6 +1,6 @@
 import numpy as np
 
-input_data = open('day1.txt','r').read().strip().split('\n') 
+input_data = open('day1.in','r').read().strip().split('\n') 
 
 freq_delta = [int(number) for number in input_data]
 print('Part 1:', sum(freq_delta))

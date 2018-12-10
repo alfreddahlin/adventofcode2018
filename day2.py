@@ -1,6 +1,6 @@
 from itertools import compress
 
-input_data = open('day2.txt','r').read().strip().split('\n')
+input_data = open('day2.in','r').read().strip().split('\n')
 
 occurrances = [{letter: id.count(letter) for letter in set(id)} for id in input_data]
 

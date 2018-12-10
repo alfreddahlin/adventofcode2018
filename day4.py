@@ -1,6 +1,6 @@
 import re
 
-input_data = open('day4.txt','r').read().strip().split('\n')
+input_data = open('day4.in','r').read().strip().split('\n')
 
 sleep_data = [re.findall(r'\d+-(\d+-\d+) \d+:(\d+)] ([a-zA-Z]+)[\S\s]#?(\d+)?',line)[0] for line in sorted(input_data)]
 

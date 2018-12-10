@@ -1,7 +1,7 @@
 import re
 from itertools import product
 
-input_data = open('day6.txt','r').read().strip().split('\n')
+input_data = open('day6.in','r').read().strip().split('\n')
 
 coords = [tuple(map(int,re.findall(r'(\d+), (\d+)', line)[0])) for line in input_data]
 x_lim,y_lim = [(min(c),max(c)) for c in zip(*coords)]
