@@ -2,7 +2,6 @@ import re
 
 input_data = open('day8.in','r').read().strip().split(' ')
 input_data = [int(data) for data in input_data]
-#input_data = [2, 3, 0, 3, 10, 11, 12, 1, 1, 0, 1, 99, 2, 1, 1, 2]
 
 def get_meta(data, key = 'sum'):
     num_child = data.pop(0)

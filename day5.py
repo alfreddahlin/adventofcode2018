@@ -1,7 +1,6 @@
 import re
 
 input_data = open('day5.in','r').read().strip()
-#input_data = 'dabAcCaCBAcCcaDA'
 
 def reduce(polymer):
     polymer_reduced = ''
