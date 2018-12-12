@@ -1,6 +1,5 @@
-import re
 from itertools import product
-import time
+
 input_data = open('day11.in','r').read().strip()
 
 serial = int(input_data)
@@ -13,9 +12,7 @@ def get_power(x,y):
     return power
 
 # Generate grid with power levels
-grid = {}
-for x,y in product(range(1,301),repeat=2):
-    grid[(x,y)] = get_power(x,y)
+grid = {(x,y): get_power(x,y) for x,y in product(range(1,301),repeat=2)}
 
 # Generate inverted cumulative sum of each grid element (inverted to simplify indexing since top left is defined as the squares position
 grid_sum = {}
