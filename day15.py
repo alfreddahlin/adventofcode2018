@@ -39,10 +39,10 @@ def get_path(pos,targets):
         path = {i: [] for i in queue}
         path_short = []
         while queue:
-            next_step = min(queue,key = lambda p: (len(path[p]),p[1],p[0]))
+            next_step = min(queue,key = lambda p: (len(path[p]),path[p][0][1],path[p][0][0]) if path[p] else (0,p[1],p[0]))
             new_steps = [step for step in get_nearby(next_step) if step in cave and (step not in seen or step in path)]
             path[next_step].append(next_step)
-            path.update({step: min(path.get(step,list(path[next_step])),path[next_step],key = lambda k: (len(k),k[0][1],k[0][0])) for step in new_steps})
+            path.update({step: path.get(step,list(path[next_step])) for step in new_steps})
             if path_short and len(path[next_step]) > len(path_short[0]):
                 return min(path_short,key = lambda p: (len(p),p[-1][1],p[-1][0]))
             elif next_step in targets:

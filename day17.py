@@ -74,6 +74,6 @@ source = (500,start-1)
 water = set()
 passed = set()
 pour(source,depth)
-#plot()
+
 print('Part 1:',len(passed))
 print('Part 2:',len(water))
