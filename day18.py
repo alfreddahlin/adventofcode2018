@@ -25,15 +25,22 @@ def get_nearby(pos):
     near_wood,near_lumber = zip(*nearby)
     return (sum(near_wood),sum(near_lumber))
 
-values = set()
-consecutive = []
-iterations = 1000000000
+seen = {}
+states = {}
+minute = 0
 
-for minute in range(1,iterations+1):
+while (str(woods),str(lumber)) not in states:
+    value = len(woods)*len(lumber)
+    if minute == 10:
+        print('Part 1:',value)
+    seen[minute] = value
+    states[(str(woods),str(lumber))] = minute
+    minute += 1
     new_woods = set()
     new_lumber = set()
     new_clear = set()
-    for pos in product(range(max_x),range(max_y)):
+
+    for pos in product(range(max_x),range(max_y)): # Update state of acres (woods and lumber)
         near_wood,near_lumber = get_nearby(pos)
         if pos in woods:
             if near_lumber > 2:
@@ -48,17 +55,7 @@ for minute in range(1,iterations+1):
     woods = new_woods
     lumber = new_lumber
     clear = new_clear
-    value = len(woods)*len(lumber)
-    if minute == 10:
-        print('Part 1:',value)
-    if value in values:
-        if first == (woods,lumber) and value == consecutive[0]:
-            print('Part 2:',consecutive[(iterations-minute) % len(consecutive)])
-            break
-        else:
-            consecutive.append(value)
-    else:
-        consecutive = [value]
-        first = (woods,lumber)
-    values.add(value)
 
+iterations = 1000000000
+loop_start = states[(str(woods),str(lumber))]
+print('Part 2:',seen[loop_start+(iterations-minute) % (minute-loop_start)])
