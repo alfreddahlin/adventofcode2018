@@ -3,7 +3,8 @@ import copy
 
 input_data = [section.split('\n') for section in open('day24.in','r').read().strip().split('\n\n')]
 
-data = [[re.findall(r'(\d+)[\s\S]+?(\d+)[\s\S]+?\(([\s\S]+?)?\)[\s\S]+?(\d+) ([a-z]+)[\s\S]+?(\d+)',group) for group in army] for army in input_data]
+data = [[re.findall(r'(\d+)[\s\S]+?(\d+)[\s\S]+?(?:\(([\s\S]+?)\)[\s\S]+?)?(\d+) ([a-z]+)[\s\S]+?(\d+)',group) for group in army] for army in input_data]
+data = [[re.findall(r'(\d+) units each with (\d+) hit points (?:\(([\s\S]+?)\))? ?with an attack that does (\d+) ([a-z]+) damage at initiative (\d+)',group) for group in army] for army in input_data]
 
 groups_initial = {}
 groups_initial.update({int(group[0][-1]): {'units': int(group[0][0]),'HP': int(group[0][1]),'immune': set(),'weak': set(),'damage': int(group[0][-3]),'attack': group[0][-2],'army': 'immune'} for group in data[0] if group})
@@ -28,11 +29,9 @@ def attack(attacker,defender):
     else:
         return defender
 
-boost_range = [-2000,2000]
-boost_units = 0
+boost = 0
 remaining = 'infect'
-while boost_range[0] != boost_range[1]:
-    boost = sum(boost_range)//2
+while True:
     groups = copy.deepcopy(groups_initial)
     {groups[i].update({'damage': groups_initial[i]['damage']+boost}) for i in groups if groups[i]['army'] == 'immune'}
     new_units = sum(group['units'] for group in groups.values())
@@ -62,9 +61,8 @@ while boost_range[0] != boost_range[1]:
             break
     if boost == 0:
         print('Part 1:',new_units)
-    if groups[list(groups.keys())[-1]]['army'] == 'infect' or units == new_units:
-        boost_range[0] = boost+1
-    else:
-        boost_range[1] = boost
-        boost_units = new_units
-print('Part 2:',boost_units)
+    if groups[list(groups.keys())[-1]]['army'] == 'immune':
+        break
+    boost += 1
+
+print('Part 2:',new_units)

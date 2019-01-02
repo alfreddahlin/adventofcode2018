@@ -38,7 +38,7 @@ for dx,dy,dz in [(dx,dy,dz) for dx,dy,dz in product([-1,0,1],repeat=3) if dx**2+
     pos = corner_max
     r_max = ((0,0,0),0)
     n = r_max[1]
-    while n >= r_max[1]:
+    while n >= r_max[1] and dx < 10000:
         n = sum(get_distance(pos,bot)<=r for bot,r in bots.items())
         if n>=r_max[1]:
             if n == r_max[1] and sum(r_max[0]) <= sum(pos):
@@ -47,6 +47,6 @@ for dx,dy,dz in [(dx,dy,dz) for dx,dy,dz in product([-1,0,1],repeat=3) if dx**2+
                 r_max = (pos,n)
         pos = (pos[0]+dx,pos[1]+dy,pos[2]+dz)
     r_final.append(r_max)
-print(r_final)
-max_r = max(r_final,key = lambda k: (k[1],sum(k[0])))
+
+r_max = max(r_final,key = lambda k: (k[1],sum(k[0])))
 print('Part 2:',sum(r_max[0]))

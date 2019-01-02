@@ -9,12 +9,11 @@ def get_distance(pos,target):
 
 constellations = {}
 
-for n,pos in enumerate(data):
+for pos in data:
     member = set()
-    [member.add(sign) for sign,points in constellations.items() for point in points if get_distance(pos,point) < 4]
+    [member.add(const_id) for const_id,points in constellations.items() for point in points if get_distance(pos,point) < 4]
     new_sign = set([pos])
     [new_sign.update(new_sign.union(constellations.pop(i))) for i in member]
-    constellations[n] = new_sign
+    constellations[pos] = new_sign
 
-print(constellations.keys())
 print('Part 1:',len(constellations))
